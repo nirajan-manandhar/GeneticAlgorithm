@@ -2,6 +2,7 @@
 // Created by Nirajan on 2018-11-23.
 //
 
+#include <iostream>
 #include "Tour.hpp"
 
 
@@ -12,23 +13,53 @@ void Tour::addCities() {
     }
 }
 
-void Tour::calculateFitness() {
+void Tour::determine_fitness() {
     vector<City>::iterator itr;
+    City firstCity;
+    City prevCity;
     double totalDistance = 0;
-    double prevX = 0;
-    double prevY = 0;
     for(itr = tour.begin(); itr != tour.end(); ++itr) {
         if(itr == tour.begin()){
-            prevX = itr->getX();
-            prevY = itr->getY();
+            firstCity = *itr;
+            prevCity = *itr;
         } else {
-            double xDist = abs(prevX - itr->getX());
-            double yDist = abs(prevY - itr->getY());
-            double xSquared = (xDist * xDist);
-            double ySquared = (yDist * yDist);
-            double netDist = sqrt((xSquared + ySquared));
-            totalDistance += netDist;
+            totalDistance += itr->determine_distance_between(prevCity);
+            prevCity = *itr;
+
+            //Connects the last city with the first one, making a round trip
+            if (itr == tour.end()) {
+                totalDistance += itr->determine_distance_between(firstCity);
+            }
         }
     }
     fitnessLevel = ((1.0/totalDistance) * SCALAR);
+}
+
+void Tour::shuffle_cities(int numOfShuffles) {
+    default_random_engine generator(static_cast<unsigned long>(chrono::system_clock::now().time_since_epoch().count()));
+    uniform_int_distribution<int> distribution(0,tour.size()-1);
+    int count = 0;
+    while (count < numOfShuffles) {
+        int first = distribution(generator);
+        int second = distribution(generator);
+
+        if (first != second) {
+            swap(tour.at(first), tour.at(second));
+            count++;
+        }
+    }
+}
+
+void Tour::printTour() {
+    for (auto &itr : tour) {
+        cout << "ID: " << itr.getId() << " X : " << itr.getX() << " Y : " << itr.getY() << endl;
+    }
+}
+
+double Tour::getFitnessLevel() const {
+    return fitnessLevel;
+}
+
+const vector<City> &Tour::getTour() const {
+    return tour;
 }

@@ -9,10 +9,24 @@
 
 class Population {
 private:
+
     vector<Tour> population;
+
+    //Number of tours in a population
+    const int POPULATION_SIZE = 32;
+
+    const int SHUFFLES = 64;
+
 public:
+
     //Default Constructor
     Population() = default;
+
+    //Populate a Population with tours
+    void addTours(Tour t);
+
+    void findElite();
+
 
 };
 

@@ -11,7 +11,7 @@ class Tour {
 
 private:
     vector<City> tour;
-    double fitnessLevel;
+    double fitnessLevel = 0;
 public:
     //Number of cities in a tour
     const int CITIES_IN_TOUR = 32;
@@ -26,7 +26,19 @@ public:
     void addCities();
 
     //Tour fitness calculator
-    void calculateFitness();
+    void determine_fitness();
+
+    //Shuffles the order of the cities in a tour
+    void shuffle_cities(int numOfShuffles);
+
+    //Prints out cities in tour, in order
+    void printTour();
+
+    //Getter for city list
+    const vector<City> &getTour() const;
+
+    //Getter for fitnessLevel
+    double getFitnessLevel() const;
 
 };
 
