@@ -6,6 +6,7 @@
 #define GENETICALGORITHM_CITY_HPP
 
 #include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -15,34 +16,28 @@ private:
     int id;
 
     //Latitude value
-    int x;
+    double x;
 
     //Longitude
-    int y;
-public:
-    //Constructor
-    City(int id);
+    double y;
 
-    //Getter for the city ID/Name.
+public:
+    //Default constructor
+    City() = default;
+
+    explicit City(int id);
+
     int getId() const;
 
-    //Setter for the city ID/Name.
     void setId(int id);
 
-    //Getter for Latitude
-    int getX() const;
+    double getX() const;
 
-    //Setter for the Latitude
-    void setX(int x);
+    void setX(double x);
 
-    //Getter for the Longitude
-    int getY() const;
+    double getY() const;
 
-    //Setter for the Longitude
-    void setY(int y);
-
-    //
-
+    void setY(double y);
 
 };
 

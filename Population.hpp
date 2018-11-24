@@ -5,8 +5,14 @@
 #ifndef GENETICALGORITHM_POPULATION_HPP
 #define GENETICALGORITHM_POPULATION_HPP
 
+#include "Tour.hpp"
 
 class Population {
+private:
+    vector<Tour> population;
+public:
+    //Default Constructor
+    Population() = default;
 
 };
 
