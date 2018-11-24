@@ -1,0 +1,14 @@
+//
+// Created by Nirajan on 2018-11-23.
+//
+
+#ifndef GENETICALGORITHM_POPULATION_HPP
+#define GENETICALGORITHM_POPULATION_HPP
+
+
+class Population {
+
+};
+
+
+#endif //GENETICALGORITHM_POPULATION_HPP
