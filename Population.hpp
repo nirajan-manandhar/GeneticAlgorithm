@@ -21,8 +21,8 @@ private:
     //Number of parent in parent pool
     const int PARENT_POOL_SIZE = 12;
 
-    //Number of parent to be crossed
-    const int NUMBER_OF_PARENTS = 1;
+    //Mutation Rate
+    const int MUTATION_RATE = 85;
 
 public:
 
@@ -43,7 +43,14 @@ public:
     //Create a subset of tours
     Tour makeParentPool();
 
-    void crossover();
+    //Create a child tour by crossing parents
+    Tour createChildTour();
+
+    void crossOver();
+
+    void mutate();
+
+
 
     double findBestDistance();
 

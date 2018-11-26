@@ -69,9 +69,31 @@ double Tour::getTour_distance() const {
     return tour_distance;
 }
 
+Tour &Tour::operator=(Tour other) {
+    swap(*this, other);
+    return *this;
+}
+
 void swap(Tour &first, Tour &second) {
     using std::swap;
     swap(first.fitnessLevel, second.fitnessLevel);
     swap(first.tour_distance, second.tour_distance);
     swap(first.tour, second.tour);
 }
+
+void Tour::mutate(int i) {
+    default_random_engine generator(static_cast<unsigned long>(chrono::system_clock::now().time_since_epoch().count()));
+    uniform_int_distribution<int> distribution(1, CITIES_IN_TOUR);
+    int index = distribution(generator);
+    swap(tour.at(i), tour.at(index));
+}
+
+Tour::Tour(vector<City> v) {
+    tour = v;
+}
+
+Tour::Tour(const Tour &t) : tour(t.tour), fitnessLevel(t.fitnessLevel), tour_distance(t.tour_distance){}
+
+
+
+

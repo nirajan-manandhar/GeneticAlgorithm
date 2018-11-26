@@ -68,51 +68,71 @@ Tour Population::makeParentPool() {
 
 }
 
-void Population::crossover() {
+Tour Population::createChildTour() {
+    Tour parent1 = makeParentPool();
+    Tour parent2 = makeParentPool();
 
     default_random_engine generator(static_cast<unsigned long>(chrono::system_clock::now().time_since_epoch().count()));
-    uniform_int_distribution<int> distribution(0,PARENT_POOL_SIZE-1);
-
+    uniform_int_distribution<int> distribution(0,32);
     int index = distribution(generator);
-    int index2 = distribution(generator);
 
-    vector<City> v;
+    vector<City> crossedTour;
 
-    /*for(int i = 0; i < index;) {
-        int count = 0;
-        while(count < index) {
-            City c = makeParentPool().getTour().at(i);
-            if(std::find(v.begin(), v.end(), c) != v.end()) {
-                i++;
-            } else {
-                v.push_back(c);
-                count++;
-                i++;
-            }
-        }
-    }*/
+    int count = 0;
 
     for(int i = 0; i < index; i++) {
-        City c = makeParentPool().getTour().at(i);
-        if(std::find(v.begin(), v.end(), c) != v.end()) {
-            /* v contains x */
+        City c = parent1.getTour().at(i);
+        crossedTour.push_back(c);
+        count++;
+    }
+
+    int i = 0;
+    while( count < 32) {
+        City c = parent2.getTour().at(i);
+        if(std::find(crossedTour.begin(), crossedTour.end(), c) != crossedTour.end()) {
+            i++;
         } else {
-            /* v does not contain x */
+            crossedTour.push_back(c);
+            count++;
+            i++;
         }
-        v.push_back(c);
     }
 
-    for(int i = 0; i < abs((PARENT_POOL_SIZE-index-1)-index2); i++) {
-        City c = makeParentPool().getTour().at(i);
-        v.push_back(c);
-    }
+    Tour tour(crossedTour);
 
-    for(int i = 0; i < index2; i++) {
-        City c = makeParentPool().getTour().at(i);
-        v.push_back(c);
-    }
+    return tour;
+}
 
-    cout << "The number of elements in the crossed tour are: " << v.size() << endl;
+void Population::crossOver() {
+    for(int i = 0; i < population.size(); i++) {
+        if((i%2!=0) && i != 0) {
+            population.at(i) = createChildTour();
+        }
+    }
+}
+
+//Randomly mutate up a few tours (excluding the elite tour!). Calculate a random
+//mutation value for each city in a specified specified tour. If this value < MUTATION_RATE, then
+//the city is swapped with a randomly chosen adjacent city from the same tour.
+void Population::mutate() {
+    default_random_engine generator(static_cast<unsigned long>(chrono::system_clock::now().time_since_epoch().count()));
+    uniform_int_distribution<int> distribution(0, 100);
+    uniform_int_distribution<int> distribution2(1, POPULATION_SIZE);
+
+    for(int i = 1; i < 5; i++) {
+        int tourIndex = distribution2(generator);
+
+        population.at(tourIndex).getTour();
+
+        for(int j = 0; j < 32; j++) {
+            int mutationVal = distribution(generator);
+            if(mutationVal < MUTATION_RATE) {
+                population.at(tourIndex).mutate(j);
+            }
+
+        }
+
+    }
 }
 
 const vector<Tour> &Population::getPopulation() const {

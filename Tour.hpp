@@ -23,6 +23,15 @@ public:
     //Default Constructor
     Tour() = default;
 
+    //Overloaded assignment operator
+    Tour&operator=(Tour other);
+
+    //City vector constructor
+    Tour(vector<City> v);
+
+    //Copy Constructor
+    Tour(const Tour& t);
+
     //Swap
     friend void swap(Tour &first, Tour &second);
 
@@ -34,6 +43,9 @@ public:
 
     //Shuffles the order of the cities in a tour
     void shuffle_cities(int numOfShuffles);
+
+    //mutate method
+    void mutate(int i);
 
     //Prints out cities in tour, in order
     void printTour();

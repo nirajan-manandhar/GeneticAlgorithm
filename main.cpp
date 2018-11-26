@@ -12,17 +12,13 @@ int main() {
     Population p;
     p.addTours(t);
 
-    cout << "best distance: " << p.findBestDistance() << endl;
-    p.selection();
-    cout << "best fitness = " << 1.0/p.findBestDistance() * 10000000 << endl;
-
     for (auto &itr : p.getPopulation()) {
         cout << "Fitness: " << itr.getFitnessLevel() << endl;
     }
 
-    p.makeParentPool();
+    //p.makeParentPool();
 
-    //p.crossover();
+    p.createChildTour();
 
     //Create a tour with cities
     /*Tour worldTour{};

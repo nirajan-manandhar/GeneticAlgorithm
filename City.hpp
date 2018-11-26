@@ -54,6 +54,8 @@ public:
     //Overloaded equality operator
     bool operator==(const City& other);
 
+
+
     int getId() const;
 
     double getX() const;
