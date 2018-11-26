@@ -32,6 +32,7 @@ void Tour::determine_fitness() {
             }
         }
     }
+    tour_distance = totalDistance;
     fitnessLevel = ((1.0/totalDistance) * SCALAR);
 }
 
@@ -62,4 +63,15 @@ double Tour::getFitnessLevel() const {
 
 const vector<City> &Tour::getTour() const {
     return tour;
+}
+
+double Tour::getTour_distance() const {
+    return tour_distance;
+}
+
+void swap(Tour &first, Tour &second) {
+    using std::swap;
+    swap(first.fitnessLevel, second.fitnessLevel);
+    swap(first.tour_distance, second.tour_distance);
+    swap(first.tour, second.tour);
 }

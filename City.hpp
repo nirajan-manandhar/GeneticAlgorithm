@@ -51,6 +51,9 @@ public:
     //Overloaded assignment operator
     City&operator=(City other);
 
+    //Overloaded equality operator
+    bool operator==(const City& other);
+
     int getId() const;
 
     double getX() const;

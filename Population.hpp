@@ -15,7 +15,14 @@ private:
     //Number of tours in a population
     const int POPULATION_SIZE = 32;
 
+    //Number of shuffles
     const int SHUFFLES = 64;
+
+    //Number of parent in parent pool
+    const int PARENT_POOL_SIZE = 12;
+
+    //Number of parent to be crossed
+    const int NUMBER_OF_PARENTS = 1;
 
 public:
 
@@ -25,8 +32,22 @@ public:
     //Populate a Population with tours
     void addTours(Tour t);
 
-    void findElite();
+    //Find the best tour in the population and puts it
+    //at the beginning of the population.
+    int findEliteTour();
 
+    //keep the best tour by moving the fittest to the front of the population. We won’t
+    //change it in this iteration, and we will call it an ’elite’ individual
+    void selection();
+
+    //Create a subset of tours
+    Tour makeParentPool();
+
+    void crossover();
+
+    double findBestDistance();
+
+    const vector<Tour> &getPopulation() const;
 
 };
 

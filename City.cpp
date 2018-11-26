@@ -55,6 +55,16 @@ int City::getId() const {
     return id;
 }
 
+bool City::operator==(const City &other) {
+    if(this->id == other.id
+        && this->x == other.x
+        && this->y == other.y) {
+        return true;
+    }
+    return false;
+}
+
+
 
 
 

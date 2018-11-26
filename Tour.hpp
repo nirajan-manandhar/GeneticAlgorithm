@@ -12,15 +12,19 @@ class Tour {
 private:
     vector<City> tour;
     double fitnessLevel = 0;
+    double tour_distance = 0;
 public:
     //Number of cities in a tour
     const int CITIES_IN_TOUR = 32;
 
     //This a number that is used to make the fitness level
-    const int SCALAR = 1000000;
+    const int SCALAR = 10000000;
 
     //Default Constructor
     Tour() = default;
+
+    //Swap
+    friend void swap(Tour &first, Tour &second);
 
     //Add cities to tour
     void addCities();
@@ -39,6 +43,8 @@ public:
 
     //Getter for fitnessLevel
     double getFitnessLevel() const;
+
+    double getTour_distance() const;
 
 };
 

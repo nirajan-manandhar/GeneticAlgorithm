@@ -7,20 +7,22 @@
 
 int main() {
 
-    City c1{1};
-    City c2{2};
-
-    cout << "X : " << c1.getX() << "Y : " << c1.getY() << endl;
-    cout << "X : " << c2.getX() << "Y : " << c2.getY() << endl;
-
-
-    cout << "Distance " << c1.determine_distance_between(c2) << endl;
-
     Tour t;
     t.addCities();
-    t.printTour();
-    t.shuffle_cities(64);
-    t.printTour();
+    Population p;
+    p.addTours(t);
+
+    cout << "best distance: " << p.findBestDistance() << endl;
+    p.selection();
+    cout << "best fitness = " << 1.0/p.findBestDistance() * 10000000 << endl;
+
+    for (auto &itr : p.getPopulation()) {
+        cout << "Fitness: " << itr.getFitnessLevel() << endl;
+    }
+
+    p.makeParentPool();
+
+    //p.crossover();
 
     //Create a tour with cities
     /*Tour worldTour{};
