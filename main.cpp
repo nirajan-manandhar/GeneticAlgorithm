@@ -30,7 +30,7 @@ int main() {
     while((best_dist/base_dist) > 0.30){
         best_dist = p.findBestDistance();
         p.crossOver();
-        //p.mutate();
+        p.mutate();
         p.evaluate();
     }
 
