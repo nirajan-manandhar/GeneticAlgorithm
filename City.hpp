@@ -22,7 +22,10 @@ private:
     //Longitude
     double y;
 
+    //The map's min value
     const int MAP_MIN = 0;
+
+    //The map's max value
     const int MAP_MAX = 1000;
 
 public:
@@ -54,12 +57,13 @@ public:
     //Overloaded equality operator
     bool operator==(const City& other);
 
-
-
+    //Getter for ID
     int getId() const;
 
+    //Getter for latitude
     double getX() const;
 
+    //Getter for longitude
     double getY() const;
 };
 

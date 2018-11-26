@@ -10,6 +10,7 @@
 class Population {
 private:
 
+    //Collection of tours
     vector<Tour> population;
 
     //Number of tours in a population
@@ -46,14 +47,19 @@ public:
     //Create a child tour by crossing parents
     Tour createChildTour();
 
+    //Cross every other tour in the population
     void crossOver();
 
+    //Mutate some cities in some tours
     void mutate();
 
+    //assign each new tour a fitness level
+    void evaluate();
 
-
+    //Finds and returns the distance of the shortest tour
     double findBestDistance();
 
+    //Returns the collection of vectors
     const vector<Tour> &getPopulation() const;
 
 };

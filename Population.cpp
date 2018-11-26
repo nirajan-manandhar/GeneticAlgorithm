@@ -18,9 +18,9 @@ void Population::addTours(Tour t) {
 }
 
 double Population::findBestDistance() {
-    double base_distance = population.at(0).getTour_distance();
-    for(Tour t : population) {
-        double currDist = t.getTour_distance();
+    double base_distance = population.at(1).getTour_distance();
+    for(int i = 0; i < population.size(); i++) {
+        double currDist = population.at(i).getTour_distance();
         if(currDist < base_distance) {
             base_distance = currDist;
         }
@@ -55,13 +55,10 @@ Tour Population::makeParentPool() {
     int count = 0;
     while (count < PARENT_POOL_SIZE) {
         int parentIndex = distribution(generator);
+        double d = population.at(parentIndex).getTour_distance();
+        cout << population.at(parentIndex).getFitnessLevel() << endl;
         parentPool.population.push_back(population.at(parentIndex));
         count++;
-    }
-
-    cout << "Parent Pool" << endl;
-    for (auto &itr : parentPool.population) {
-        cout << "POP: " << itr.getFitnessLevel() << endl;
     }
 
     return parentPool.population.at(parentPool.findEliteTour());
@@ -98,9 +95,9 @@ Tour Population::createChildTour() {
         }
     }
 
-    Tour tour(crossedTour);
+    Tour t(crossedTour);
 
-    return tour;
+    return t;
 }
 
 void Population::crossOver() {
@@ -132,6 +129,12 @@ void Population::mutate() {
 
         }
 
+    }
+}
+
+void Population::evaluate() {
+    for(Tour t : population) {
+        t.determine_fitness();
     }
 }
 

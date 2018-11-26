@@ -10,6 +10,7 @@
 class Tour {
 
 private:
+    //Collection of cities
     vector<City> tour;
     double fitnessLevel = 0;
     double tour_distance = 0;
@@ -56,6 +57,7 @@ public:
     //Getter for fitnessLevel
     double getFitnessLevel() const;
 
+    //Getter for the tour distance
     double getTour_distance() const;
 
 };
